@@ -1,0 +1,45 @@
+# =============================================================================
+# The Headless Factory — environment template
+#
+# Copy to .env and fill in the values for the backend you are using.
+# Never commit .env — it is in .gitignore for a reason.
+# =============================================================================
+
+# ── Backend selection ───────────────────────────────────────────────────────
+# One of: openrouter | gemini | local
+# - openrouter: free-tier cloud models via OpenRouter (baseline)
+# - gemini:     Google Gemini cloud
+# - local:      self-hosted llama-server (Phase 2+)
+BACKEND=openrouter
+
+
+# ── OpenRouter (cloud) ──────────────────────────────────────────────────────
+# Get a key at https://openrouter.ai/keys
+OPENROUTER_API_KEY=
+OPENROUTER_MODEL=meta-llama/llama-3.3-70b-instruct:free
+
+
+# ── Gemini (cloud) ──────────────────────────────────────────────────────────
+# Get a key at https://aistudio.google.com/apikey
+GEMINI_API_KEY=
+GEMINI_MODEL=gemini-2.0-flash
+
+
+# ── Local model (Phase 2+) ──────────────────────────────────────────────────
+# Used when BACKEND=local. llama-server inside the Compose network.
+LLM_URL=http://llama-server:8080/v1
+LLM_MODEL=phi-4-mini
+
+
+# ── Chief of Staff persona ──────────────────────────────────────────────────
+# COS_NAME is the assistant's name in replies and the CLI banner.
+# COS_SOUL is optional — a persona prelude prepended to the system prompt.
+#   Example: COS_SOUL="You are patient, dry-witted, and precise."
+COS_NAME=Winston
+COS_SOUL=
+
+
+# ── Memory ──────────────────────────────────────────────────────────────────
+# How long a conversation sits in hot (Redis) memory before expiring.
+# The TTL refreshes on every message, so active conversations never age out.
+HOT_MEMORY_HOURS=24
